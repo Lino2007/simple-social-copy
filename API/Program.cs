@@ -1,14 +1,17 @@
 using API;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
-builder.Services.AddDbContext<SocDbContext>(opt =>
+builder.Services.AddDbContext<SimpleSocialContext>(opt =>
 {
-    opt.UseSqlServer(builder.Configuration["ConnectionStrings:SocDb"]);
+    opt.UseSqlServer(builder.Configuration["ConnectionStrings:SimpleSocial"]);
 });
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
