@@ -1,18 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
 
 namespace API.Models
 {
     [Table("UserRole", Schema = "Soc")]
-    public partial class UserRole
+    public partial class UserRole : CrudEntity
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }
-
         public Guid PersonId { get; set; }
 
         public Guid RoleId { get; set; }

@@ -9,7 +9,7 @@ namespace API.Models
     [Table("Person", Schema = "Soc")]
     [Index(nameof(Email), Name = "UQ__Person__A9D10534CAA52FB4", IsUnique = true)]
     [Index(nameof(Nickname), Name = "UQ__Person__CC6CD17EB7866937", IsUnique = true)]
-    public partial class Person
+    public partial class Person : CrudEntity
     {
         public Person()
         {
@@ -19,10 +19,6 @@ namespace API.Models
             Stars = new HashSet<Star>();
             UserRoles = new HashSet<UserRole>();
         }
-
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }
 
         [StringLength(30)]
         public string Firstname { get; set; } = null!;

@@ -1,3 +1,5 @@
+using System.Linq;
+using System.Reflection;
 using API;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
@@ -8,13 +10,20 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+// register repositories
+Assembly.GetExecutingAssembly().GetTypes().Where(t => t.Name.EndsWith("Repository") && !t.IsAbstract && !t.IsInterface)
+    .Select(a => new { assignedType = a, serviceTypes = a.GetInterfaces().ToList() })
+    .ToList()
+    .ForEach(typesToRegister =>
+    {
+        typesToRegister.serviceTypes.ForEach(typeToRegister => builder.Services.AddScoped(typeToRegister, typesToRegister.assignedType));
+    });
+
 builder.Services.AddControllers();
-builder.Services.AddDbContext<SimpleSocialContext>(opt =>
-{
-    opt.UseSqlServer(builder.Configuration["ConnectionStrings:SimpleSocial"]);
-});
+builder.Services.AddDbContext<SimpleSocialContext>(opt => opt.UseSqlServer(builder.Configuration["ConnectionStrings:SimpleSocial"]));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 
 var app = builder.Build();
 
@@ -38,3 +47,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+

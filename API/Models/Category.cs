@@ -8,16 +8,12 @@ namespace API.Models
 {
     [Table("Category", Schema = "Soc")]
     [Index(nameof(Title), Name = "UQ__Category__2CB664DC9EA534E4", IsUnique = true)]
-    public partial class Category
+    public partial class Category : CrudEntity
     {
         public Category()
         {
             Posts = new HashSet<Post>();
         }
-
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }
 
         [StringLength(30)]
         public string Title { get; set; } = null!;

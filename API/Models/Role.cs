@@ -8,17 +8,13 @@ namespace API.Models
 {
     [Table("Role", Schema = "Soc")]
     [Index(nameof(Name), Name = "UQ__Role__737584F6C2FA303D", IsUnique = true)]
-    public partial class Role
+    public partial class Role : CrudEntity
     {
         public Role()
         {
             RolePermissions = new HashSet<RolePermission>();
             UserRoles = new HashSet<UserRole>();
         }
-
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }
 
         [StringLength(30)]
         public string Name { get; set; } = null!;

@@ -1,8 +1,5 @@
-﻿using System;
-using API.Models;
-using System.Collections.Generic;
+﻿using API.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace API;
 

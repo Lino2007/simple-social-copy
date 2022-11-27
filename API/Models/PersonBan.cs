@@ -1,18 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
 
 namespace API.Models
 {
     [Table("PersonBan", Schema = "Soc")]
-    public partial class PersonBan
+    public partial class PersonBan : CrudEntity
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }
-
         public bool Active { get; set; }
 
         [Column(TypeName = "date")]

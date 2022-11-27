@@ -2,22 +2,17 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
 
 namespace API.Models
 {
     [Table("Comment", Schema = "Soc")]
-    public partial class Comment
+    public partial class Comment : CrudEntity
     {
         public Comment()
         {
             Reports = new HashSet<Report>();
             Stars = new HashSet<Star>();
         }
-
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }
 
         [StringLength(255)]
         public string Content { get; set; } = null!;

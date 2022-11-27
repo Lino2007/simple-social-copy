@@ -1,18 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
 
 namespace API.Models
 {
     [Table("Star", Schema = "Soc")]
-    public partial class Star
+    public partial class Star : CrudEntity
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }
-
         public Guid PersonId { get; set; }
 
         public Guid? PostId { get; set; }

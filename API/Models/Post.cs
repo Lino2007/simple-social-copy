@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
 
 namespace API.Models
 {
     [Table("Post", Schema = "Soc")]
-    public partial class Post
+    public partial class Post : CrudEntity
     {
         public Post()
         {
@@ -15,10 +14,6 @@ namespace API.Models
             Reports = new HashSet<Report>();
             Stars = new HashSet<Star>();
         }
-
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }
 
         [StringLength(50)]
         public string Title { get; set; } = null!;

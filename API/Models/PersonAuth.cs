@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
@@ -8,12 +7,8 @@ namespace API.Models
 {
     [Table("PersonAuth", Schema = "Soc")]
     [Index(nameof(Salt), Name = "UQ__PersonAu__A152BCCE4BED49AC", IsUnique = true)]
-    public partial class PersonAuth
+    public partial class PersonAuth : CrudEntity
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }
-
         [StringLength(128)]
         public string Password { get; set; } = null!;
 

@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using API.Models;
 using System.Linq;
 using System;
+using API.Repository.Interfaces;
 
 namespace API.Controllers;
 
@@ -15,11 +16,13 @@ public class GeneralController : ControllerBase
 {
     private readonly ILogger<GeneralController> _logger;
     private readonly SimpleSocialContext _db;
+    private readonly IPersonRepository personRepository;
 
-    public GeneralController(ILogger<GeneralController> logger, SimpleSocialContext db)
+    public GeneralController(ILogger<GeneralController> logger, SimpleSocialContext db, IPersonRepository personRepository)
     {
         _logger = logger;
         _db = db;
+        this.personRepository = personRepository;
     }
 
     [HttpGet("category")]
@@ -31,8 +34,52 @@ public class GeneralController : ControllerBase
     [HttpGet("person")]
     public async Task<ActionResult<IEnumerable<Person>>> GetPeople()
     {
-        return await _db.People.AsNoTracking().ToListAsync();
+        return new ActionResult<IEnumerable<Person>>(await personRepository.GetAll());
     }
+
+    [HttpGet("person/add")]
+    public async Task<ActionResult<IEnumerable<Person>>> TestAddPerson()
+    {
+        var p = (await personRepository.FindBy(u => u.Nickname.Equals("Test Nick"))).FirstOrDefault();
+        if (p is null)
+        {
+            p = new Person
+            {
+                Firstname = "TEST FIRSTNAME",
+                Lastname = "Lastname",
+                Nickname = "Test Nick",
+                Bio = "test",
+                Email = "test@test.com",
+                Country = "country",
+                DateOfBirth = DateTime.Now,
+                DateCreated = DateTime.Now,
+                DateModified = DateTime.Now
+            };
+            await personRepository.Add(p);
+        }
+        return new ActionResult<IEnumerable<Person>>(await personRepository.GetAll());
+    }
+
+    [HttpGet("person/update")]
+    public async Task<ActionResult<IEnumerable<Person>>> TestUpdatePerson()
+    {
+        var p = (await personRepository.FindBy(u => u.Nickname.Equals("Test Nick"))).FirstOrDefault();
+        if (p is not null)
+        {
+            p.Bio = "Updated Bio";
+            await personRepository.Update(p);
+        }
+        return new ActionResult<IEnumerable<Person>>(await personRepository.GetAll());
+    }
+
+    [HttpGet("person/delete")]
+    public async Task<ActionResult<IEnumerable<Person>>> TestDeletePerson()
+    {
+        var p = (await personRepository.FindBy(u => u.Nickname.Equals("Test Nick"))).FirstOrDefault();
+        if (p is not null) { await personRepository.Delete(p); }
+        return new ActionResult<IEnumerable<Person>>(await personRepository.GetAll());
+    }
+
 
     [HttpGet("comment")]
     public async Task<ActionResult<IEnumerable<Comment>>> GetComments()
