@@ -1,6 +1,8 @@
 using System.Linq;
 using System.Reflection;
 using API;
+using API.Service.Implementation;
+using API.Service.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,7 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 // register repositories
-Assembly.GetExecutingAssembly().GetTypes().Where(t => t.Name.EndsWith("Repository") && !t.IsAbstract && !t.IsInterface)
+Assembly.GetExecutingAssembly().GetTypes().Where(t => (t.Name.EndsWith("Repository") || t.Name.EndsWith("Service")) && !t.IsAbstract && !t.IsInterface)
     .Select(a => new { assignedType = a, serviceTypes = a.GetInterfaces().ToList() })
     .ToList()
     .ForEach(typesToRegister =>

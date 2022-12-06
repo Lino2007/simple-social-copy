@@ -32,5 +32,10 @@ namespace API.Repository.Implementations
         {
             return await db.Set<T>().AsNoTracking().ToListAsync();
         }
+
+        public async virtual Task<T?> GetById(Guid id)
+        {
+            return (await this.FindBy(p => p.Id.Equals(id))).FirstOrDefault();
+        }
     }
 }

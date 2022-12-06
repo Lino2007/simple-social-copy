@@ -76,7 +76,7 @@ public class GeneralController : ControllerBase
     public async Task<ActionResult<IEnumerable<Person>>> TestDeletePerson()
     {
         var p = (await personRepository.FindBy(u => u.Nickname.Equals("Test Nick"))).FirstOrDefault();
-        if (p is not null) { await personRepository.Delete(p); }
+        //if (p is not null) { await personRepository.Delete(p); }
         return new ActionResult<IEnumerable<Person>>(await personRepository.GetAll());
     }
 

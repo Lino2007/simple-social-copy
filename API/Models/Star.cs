@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
+using API.Models.Request;
 
 namespace API.Models
 {
@@ -24,5 +25,15 @@ namespace API.Models
         [ForeignKey(nameof(PostId))]
         [InverseProperty("Stars")]
         public virtual Post? Post { get; set; }
+
+        public static explicit operator Star(AddStarRequest v)
+        {
+            return new Star
+            {
+                PersonId = v.PersonId,
+                CommentId = v.CommentId,
+                PostId = v.PostId
+            };
+        }
     }
 }

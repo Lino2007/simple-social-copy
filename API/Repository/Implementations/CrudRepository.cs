@@ -1,3 +1,8 @@
+using System;
+using System.Data.Common;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Threading;
 using System.Threading.Tasks;
 using API.Models;
 using API.Repository.Interfaces;
@@ -19,17 +24,21 @@ namespace API.Repository.Implementations
             return entity;
         }
 
-        public async virtual Task<T> Delete(T entity)
+        public async virtual Task Delete(Guid id)
         {
-            db.Set<T>().Remove(entity);
-            await db.SaveChangesAsync();
-            return entity;
+            var entity = await db.Set<T>().SingleOrDefaultAsync(t => t.Id.Equals(id));
+            if (entity != null)
+            {
+                db.Set<T>().Remove(entity);
+                await db.SaveChangesAsync();
+            }
         }
 
-        public async virtual Task Update(T entity)
+        public async virtual Task<T> Update(T entity)
         {
             db.Entry(entity).State = EntityState.Modified;
             await db.SaveChangesAsync();
+            return entity;
         }
     }
 }

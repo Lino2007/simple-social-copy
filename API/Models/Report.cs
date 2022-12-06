@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using API.Models.Request;
 
 namespace API.Models
 {
@@ -27,5 +28,17 @@ namespace API.Models
         [ForeignKey(nameof(PostId))]
         [InverseProperty("Reports")]
         public virtual Post? Post { get; set; }
+
+        public static explicit operator Report(AddReportRequest v)
+        {
+            return new Report
+            {
+                Reason = v.Reason,
+                DateSubmitted = DateTime.Now,
+                Resolved = false,
+                PostId = v.PostId,
+                CommentId = v.CommentId
+            };
+        }
     }
 }

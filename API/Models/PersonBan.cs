@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using API.Models.Request;
 
 namespace API.Models
 {
@@ -27,5 +28,18 @@ namespace API.Models
         [ForeignKey(nameof(PersonId))]
         [InverseProperty("PersonBans")]
         public virtual Person Person { get; set; } = null!;
+
+        public static explicit operator PersonBan(AddPersonBanRequest v)
+        {
+            return new PersonBan
+            {
+                Active = v.Active,
+                ActiveUntil = v.ActiveUntil,
+                Reason = v.Reason,
+                PersonId = v.PersonId,
+                DateCreated = DateTime.Now,
+                DateModified = DateTime.Now
+            };
+        }
     }
 }

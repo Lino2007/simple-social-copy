@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using API.Models.Request;
 
 namespace API.Models
 {
@@ -45,5 +46,18 @@ namespace API.Models
 
         [InverseProperty(nameof(Star.Post))]
         public virtual ICollection<Star> Stars { get; set; }
+
+        public static explicit operator Post(AddPostRequest p)
+        {
+            return new Post
+            {
+                Title = p.Title,
+                Content = p.Content,
+                CategoryId = p.CategoryId,
+                DateCreated = DateTime.Now,
+                DateModified = DateTime.Now,
+                Locked = false
+            };
+        }
     }
 }

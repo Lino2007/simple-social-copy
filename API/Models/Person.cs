@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using API.Models.Request;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Models
@@ -68,5 +69,21 @@ namespace API.Models
 
         [InverseProperty(nameof(UserRole.Person))]
         public virtual ICollection<UserRole> UserRoles { get; set; }
+
+        public static explicit operator Person(AddPersonRequest p)
+        {
+            return new Person
+            {
+                Firstname = p.Firstname,
+                Lastname = p.Lastname,
+                Nickname = p.Nickname,
+                Email = p.Email,
+                Bio = p.Bio,
+                DateOfBirth = p.DateOfBirth,
+                Country = p.Country,
+                DateCreated = DateTime.Now,
+                DateModified = DateTime.Now
+            };
+        }
     }
 }

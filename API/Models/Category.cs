@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using API.Models.Request;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Models
@@ -35,5 +36,17 @@ namespace API.Models
 
         [InverseProperty(nameof(Post.Category))]
         public virtual ICollection<Post> Posts { get; set; }
+
+        public static explicit operator Category(AddCategoryRequest c)
+        {
+            return new Category
+            {
+                Description = c.Description,
+                Title = c.Title,
+                ForumCreator = c.ForumCreator,
+                DateCreated = DateTime.Now,
+                DateModified = DateTime.Now
+            };
+        }
     }
 }
