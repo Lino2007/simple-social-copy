@@ -112,7 +112,7 @@ public partial class SimpleSocialContext : DbContext
 
             entity.HasOne(d => d.Roles)
                 .WithMany(p => p.RolePermissions)
-                .HasForeignKey(d => d.RolesId)
+                .HasForeignKey(d => d.RoleId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FKRolePermis536657");
         });

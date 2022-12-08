@@ -7,14 +7,17 @@ namespace SOC.DataContracts.Models
     {
         public Guid PermissionId { get; set; }
 
-        public Guid RolesId { get; set; }
+        public Guid RoleId { get; set; }
+
+        [Column(TypeName = "datetime")]
+        public DateTime DateCreated { get; set; }
 
 
         [ForeignKey(nameof(PermissionId))]
         [InverseProperty("RolePermissions")]
         public virtual Permission Permission { get; set; } = null!;
 
-        [ForeignKey(nameof(RolesId))]
+        [ForeignKey(nameof(RoleId))]
         [InverseProperty(nameof(Role.RolePermissions))]
         public virtual Role Roles { get; set; } = null!;
     }

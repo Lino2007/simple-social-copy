@@ -9,6 +9,8 @@ namespace SOC.DataContracts.Models
 
         public Guid RoleId { get; set; }
 
+        [Column(TypeName = "datetime")]
+        public DateTime DateCreated { get; set; }
 
         [ForeignKey(nameof(PersonId))]
         [InverseProperty("UserRoles")]

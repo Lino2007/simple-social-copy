@@ -10,7 +10,7 @@ namespace SOC.DataContracts.Models
         [StringLength(255)]
         public string Reason { get; set; } = null!;
 
-        [Column(TypeName = "date")]
+        [Column(TypeName = "datetime")]
         public DateTime DateSubmitted { get; set; }
 
         public bool Resolved { get; set; }
@@ -19,6 +19,8 @@ namespace SOC.DataContracts.Models
 
         public Guid? CommentId { get; set; }
 
+        [Column(TypeName = "datetime")]
+        public DateTime DateModified { get; set; }
 
         [ForeignKey(nameof(CommentId))]
         [InverseProperty("Reports")]
@@ -36,7 +38,8 @@ namespace SOC.DataContracts.Models
                 DateSubmitted = DateTime.Now,
                 Resolved = false,
                 PostId = v.PostId,
-                CommentId = v.CommentId
+                CommentId = v.CommentId,
+                DateModified = DateTime.Now
             };
         }
     }
