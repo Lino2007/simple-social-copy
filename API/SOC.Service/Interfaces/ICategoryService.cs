@@ -5,6 +5,6 @@ namespace SOC.Service.Interfaces
 {
     public interface ICategoryService : ICrudService<Category>
     {
-        public Task<Category?> Update(UpdateCategoryRequest entity);
+        Task<Category?> Update(UpdateCategoryRequest entity);
     }
 }

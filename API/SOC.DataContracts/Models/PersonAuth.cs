@@ -17,12 +17,6 @@ namespace SOC.DataContracts.Models
         [Column(TypeName = "datetime")]
         public DateTime? ExpireDate { get; set; }
 
-        [Column(TypeName = "datetime")]
-        public DateTime DateCreated { get; set; }
-
-        [Column(TypeName = "datetime")]
-        public DateTime DateModified { get; set; }
-
         [InverseProperty("PersonAuth")]
         public virtual Person? Person { get; set; }
     }

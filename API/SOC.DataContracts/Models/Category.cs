@@ -22,12 +22,6 @@ namespace SOC.DataContracts.Models
 
         public Guid ForumCreator { get; set; }
 
-        [Column(TypeName = "datetime")]
-        public DateTime DateCreated { get; set; }
-
-        [Column(TypeName = "datetime")]
-        public DateTime DateModified { get; set; }
-
         [ForeignKey(nameof(ForumCreator))]
         [InverseProperty(nameof(Person.Categories))]
         public virtual Person ForumCreatorNavigation { get; set; } = null!;

@@ -6,6 +6,5 @@ namespace SOC.Repository.Interfaces
 {
     public interface IPersonBanRepository : ICrudRepository<PersonBan>
     {
-        Task<PersonBan?> UpdatePersonBan(UpdatePersonBanRequest personBan);
     }
 }

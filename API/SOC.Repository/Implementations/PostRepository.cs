@@ -10,16 +10,5 @@ namespace SOC.Repository.Implementations
         public PostRepository(SimpleSocialContext db) : base(db)
         {
         }
-
-        public async Task<Post?> UpdatePost(UpdatePostRequest post)
-        {
-            var p = await db.Posts.SingleOrDefaultAsync(p => p.Id.Equals(post.Id));
-            if (p == null)
-            {
-                return null;
-            }
-            db.Entry(p).CurrentValues.SetValues(post);
-            return await Update(p);
-        }
     }
 }

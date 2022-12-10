@@ -154,6 +154,24 @@ public partial class SimpleSocialContext : DbContext
         OnModelCreatingPartial(modelBuilder);
     }
 
+    public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+    {
+        var entries = ChangeTracker.Entries().Where(e => e.Entity is BaseEntity && (
+                    e.State == EntityState.Added || e.State == EntityState.Modified));
+
+        foreach (var entityEntry in entries)
+        {
+            ((BaseEntity)entityEntry.Entity).DateModified = DateTime.Now;
+
+            if (entityEntry.State == EntityState.Added)
+            {
+                ((BaseEntity)entityEntry.Entity).DateCreated = DateTime.Now;
+            }
+        }
+
+        return await base.SaveChangesAsync();
+    }
+
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
 

@@ -1,6 +1,5 @@
-using System;
-using System.Threading.Tasks;
 using SOC.DataContracts.Models;
+using SOC.DataContracts.Request;
 
 namespace SOC.Repository.Interfaces
 {
@@ -9,5 +8,6 @@ namespace SOC.Repository.Interfaces
         Task<T> Add(T entity);
         Task Delete(Guid id);
         Task<T> Update(T entity);
+        Task<T?> Update(UpdateDto dtoEntity);
     }
 }

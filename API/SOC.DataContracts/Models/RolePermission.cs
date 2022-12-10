@@ -9,10 +9,6 @@ namespace SOC.DataContracts.Models
 
         public Guid RoleId { get; set; }
 
-        [Column(TypeName = "datetime")]
-        public DateTime DateCreated { get; set; }
-
-
         [ForeignKey(nameof(PermissionId))]
         [InverseProperty("RolePermissions")]
         public virtual Permission Permission { get; set; } = null!;

@@ -22,13 +22,6 @@ namespace SOC.DataContracts.Models
 
         public bool Editable { get; set; }
 
-        [Column(TypeName = "datetime")]
-        public DateTime DateModified { get; set; }
-
-        [Column(TypeName = "datetime")]
-        public DateTime DateCreated { get; set; }
-
-
         [ForeignKey(nameof(AuthorId))]
         [InverseProperty(nameof(Person.Comments))]
         public virtual Person Author { get; set; } = null!;
@@ -49,9 +42,7 @@ namespace SOC.DataContracts.Models
             {
                 Content = c.Content,
                 AuthorId = c.AuthorId,
-                PostId = c.PostId,
-                DateCreated = DateTime.Now,
-                DateModified = DateTime.Now,
+                PostId = c.PostId
             };
         }
     }

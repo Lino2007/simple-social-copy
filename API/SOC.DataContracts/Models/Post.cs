@@ -25,13 +25,6 @@ namespace SOC.DataContracts.Models
 
         public Guid CategoryId { get; set; }
 
-        [Column(TypeName = "datetime")]
-        public DateTime DateCreated { get; set; }
-
-        [Column(TypeName = "datetime")]
-        public DateTime DateModified { get; set; }
-
-
         [ForeignKey(nameof(CategoryId))]
         [InverseProperty("Posts")]
         public virtual Category Category { get; set; } = null!;
@@ -52,8 +45,6 @@ namespace SOC.DataContracts.Models
                 Title = p.Title,
                 Content = p.Content,
                 CategoryId = p.CategoryId,
-                DateCreated = DateTime.Now,
-                DateModified = DateTime.Now,
                 Locked = false
             };
         }

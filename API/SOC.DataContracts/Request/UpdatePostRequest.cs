@@ -1,6 +1,6 @@
 namespace SOC.DataContracts.Request
 {
-    public class UpdatePostRequest : UpdateRequest
+    public class UpdatePostRequest : UpdateDto
     {
         public string Title { get; set; } = null!;
         public string Content { get; set; } = null!;

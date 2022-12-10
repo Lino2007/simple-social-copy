@@ -1,4 +1,5 @@
 using SOC.DataContracts.Models;
+using SOC.DataContracts.Request;
 
 namespace SOC.Service.Interfaces
 {

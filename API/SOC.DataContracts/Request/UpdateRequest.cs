@@ -1,6 +1,6 @@
 namespace SOC.DataContracts.Request
 {
-    public abstract class UpdateRequest
+    public abstract class UpdateDto
     {
         public Guid Id { get; set; }
     }

@@ -41,7 +41,7 @@ namespace SOC.Service.Implementations
 
         public async Task<Post?> Update(UpdatePostRequest entity)
         {
-            return await postRepository.UpdatePost(entity);
+            return await postRepository.Update(entity);
         }
     }
 }

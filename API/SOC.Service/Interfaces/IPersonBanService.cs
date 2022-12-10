@@ -5,6 +5,6 @@ namespace SOC.Service.Interfaces
 {
     public interface IPersonBanService : ICrudService<PersonBan>
     {
-        public Task<PersonBan?> Update(UpdatePersonBanRequest entity);
+        Task<PersonBan?> Update(UpdatePersonBanRequest entity);
     }
 }

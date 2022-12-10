@@ -40,7 +40,7 @@ namespace SOC.Service.Implementations
 
         public async Task<Category?> Update(UpdateCategoryRequest entity)
         {
-            return await categoryRepository.UpdateCategory(entity);
+            return await categoryRepository.Update(entity);
         }
     }
 }

@@ -41,7 +41,7 @@ namespace SOC.Service.Implementations
 
         public async Task<Comment?> Update(UpdateCommentRequest entity)
         {
-            return await commentRepository.UpdateComment(entity);
+            return await commentRepository.Update(entity);
         }
     }
 }

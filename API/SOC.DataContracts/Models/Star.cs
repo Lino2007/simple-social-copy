@@ -12,9 +12,6 @@ namespace SOC.DataContracts.Models
 
         public Guid? CommentId { get; set; }
 
-        [Column(TypeName = "datetime")]
-        public DateTime DateCreated { get; set; }
-
         [ForeignKey(nameof(CommentId))]
         [InverseProperty("Stars")]
         public virtual Comment? Comment { get; set; }
@@ -33,7 +30,6 @@ namespace SOC.DataContracts.Models
             {
                 PersonId = v.PersonId,
                 CommentId = v.CommentId,
-                DateCreated = DateTime.Now,
                 PostId = v.PostId
             };
         }

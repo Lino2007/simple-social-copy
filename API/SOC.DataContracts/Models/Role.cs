@@ -17,12 +17,6 @@ namespace SOC.DataContracts.Models
         [StringLength(30)]
         public string Name { get; set; } = null!;
 
-        [Column(TypeName = "datetime")]
-        public DateTime DateCreated { get; set; }
-
-        [Column(TypeName = "datetime")]
-        public DateTime DateModified { get; set; }
-
         [InverseProperty(nameof(RolePermission.Roles))]
         public virtual ICollection<RolePermission> RolePermissions { get; set; }
 

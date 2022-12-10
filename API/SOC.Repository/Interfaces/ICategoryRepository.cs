@@ -9,6 +9,5 @@ namespace SOC.Repository.Interfaces
 {
     public interface ICategoryRepository : ICrudRepository<Category>
     {
-        Task<Category?> UpdateCategory(UpdateCategoryRequest category);
     }
 }

@@ -42,13 +42,6 @@ namespace SOC.DataContracts.Models
 
         public Guid? PersonAuthId { get; set; }
 
-        [Column(TypeName = "datetime")]
-        public DateTime DateCreated { get; set; }
-
-        [Column(TypeName = "datetime")]
-        public DateTime DateModified { get; set; }
-
-
         [ForeignKey(nameof(PersonAuthId))]
         [InverseProperty("Person")]
         public virtual PersonAuth? PersonAuth { get; set; }
@@ -78,9 +71,7 @@ namespace SOC.DataContracts.Models
                 Email = p.Email,
                 Bio = p.Bio,
                 DateOfBirth = p.DateOfBirth,
-                Country = p.Country,
-                DateCreated = DateTime.Now,
-                DateModified = DateTime.Now
+                Country = p.Country
             };
         }
     }

@@ -1,7 +1,7 @@
 using SOC.DataContracts.Models;
 using SOC.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
-
+using SOC.DataContracts.Request;
 
 namespace SOC.Repository.Implementations
 {
@@ -33,6 +33,17 @@ namespace SOC.Repository.Implementations
             db.Entry(entity).State = EntityState.Modified;
             await db.SaveChangesAsync();
             return entity;
+        }
+
+        public async virtual Task<T?> Update(UpdateDto dtoEntity)
+        {
+            var itemToUpdate = await db.Set<T>().SingleOrDefaultAsync(p => p.Id.Equals(dtoEntity.Id));
+            if (itemToUpdate == null)
+            {
+                return null;
+            }
+            db.Entry(itemToUpdate).CurrentValues.SetValues(dtoEntity);
+            return await Update(itemToUpdate);
         }
     }
 }

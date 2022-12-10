@@ -5,6 +5,6 @@ namespace SOC.Service.Interfaces
 {
     public interface ICommentService : ICrudService<Comment>
     {
-        public Task<Comment?> Update(UpdateCommentRequest entity);
+        Task<Comment?> Update(UpdateCommentRequest entity);
     }
 }

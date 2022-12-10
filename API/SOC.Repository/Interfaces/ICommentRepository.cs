@@ -6,6 +6,5 @@ namespace SOC.Repository.Interfaces
 {
     public interface ICommentRepository : ICrudRepository<Comment>
     {
-        public Task<Comment?> UpdateComment(UpdateCommentRequest post);
     }
 }

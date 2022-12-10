@@ -17,13 +17,6 @@ namespace SOC.DataContracts.Models
 
         public Guid PersonId { get; set; }
 
-        [Column(TypeName = "datetime")]
-        public DateTime DateCreated { get; set; }
-
-        [Column(TypeName = "datetime")]
-        public DateTime DateModified { get; set; }
-
-
         [ForeignKey(nameof(PersonId))]
         [InverseProperty("PersonBans")]
         public virtual Person Person { get; set; } = null!;
@@ -35,9 +28,7 @@ namespace SOC.DataContracts.Models
                 Active = v.Active,
                 ActiveUntil = v.ActiveUntil,
                 Reason = v.Reason,
-                PersonId = v.PersonId,
-                DateCreated = DateTime.Now,
-                DateModified = DateTime.Now
+                PersonId = v.PersonId
             };
         }
     }
