@@ -20,7 +20,7 @@ namespace SOC.Repository.Implementations
 
         public async virtual Task Delete(Guid id)
         {
-            var entity = await db.Set<T>().SingleOrDefaultAsync(t => t.Id.Equals(id));
+            var entity = await db.Set<T>().FirstOrDefaultAsync(t => t.Id.Equals(id));
             if (entity != null)
             {
                 db.Set<T>().Remove(entity);
@@ -37,7 +37,7 @@ namespace SOC.Repository.Implementations
 
         public async virtual Task<T?> Update(UpdateDto dtoEntity)
         {
-            var itemToUpdate = await db.Set<T>().SingleOrDefaultAsync(p => p.Id.Equals(dtoEntity.Id));
+            var itemToUpdate = await db.Set<T>().FirstOrDefaultAsync(p => p.Id.Equals(dtoEntity.Id));
             if (itemToUpdate == null)
             {
                 return null;
