@@ -1,6 +1,7 @@
 using SOC.DataContracts.Models;
 using SOC.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using SOC.DataContracts.Response;
 
 namespace SOC.REST.Controllers
 {
@@ -16,9 +17,10 @@ namespace SOC.REST.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<UserRole>>> GetUserRoles()
+        public async Task<ActionResult<IEnumerable<UserRoleResponse>>> GetUserRoles()
         {
-            return new ActionResult<IEnumerable<UserRole>>(await userRoleService.GetAll());
+            var userRoles = (await userRoleService.GetAll()).Select(t => (UserRoleResponse)t);
+            return new ActionResult<IEnumerable<UserRoleResponse>>(userRoles);
         }
     }
 }

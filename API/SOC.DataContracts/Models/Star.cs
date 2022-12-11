@@ -24,12 +24,22 @@ namespace SOC.DataContracts.Models
         [InverseProperty("Stars")]
         public virtual Post? Post { get; set; }
 
-        public static explicit operator Star(AddStarRequest v)
+        public static explicit operator Star(AddCommentStarRequest v)
         {
             return new Star
             {
                 PersonId = v.PersonId,
                 CommentId = v.CommentId,
+                PostId = null
+            };
+        }
+
+        public static explicit operator Star(AddPostStarRequest v)
+        {
+            return new()
+            {
+                PersonId = v.PersonId,
+                CommentId = null,
                 PostId = v.PostId
             };
         }

@@ -40,7 +40,7 @@ namespace SOC.DataContracts.Models
 
         public static explicit operator Post(AddPostRequest p)
         {
-            return new Post
+            return new()
             {
                 Title = p.Title,
                 Content = p.Content,

@@ -2,6 +2,7 @@ using SOC.DataContracts.Models;
 using SOC.DataContracts.Request;
 using SOC.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using SOC.DataContracts.Response;
 
 namespace SOC.REST.Controllers
 {
@@ -17,27 +18,36 @@ namespace SOC.REST.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Report?>> GetReportById(Guid id)
+        public async Task<ActionResult<ReportResponse>> GetReportById(Guid id)
         {
-            return await reportService.GetById(id);
+            var report = await reportService.GetById(id);
+            return report is null ? NotFound() : (ReportResponse)report;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Report>>> GetReports()
+        public async Task<ActionResult<IEnumerable<ReportResponse>>> GetReports()
         {
-            return new ActionResult<IEnumerable<Report>>(await reportService.GetAll());
+            var reports = (await reportService.GetAll()).Select(t => (ReportResponse)t);
+            return new ActionResult<IEnumerable<ReportResponse>>(reports);
         }
 
-        [HttpPost]
-        public async Task<ActionResult<Report>> AddReport([FromBody] AddReportRequest report)
+        [HttpPost("comment")]
+        public async Task<ActionResult<ReportResponse>> AddReportToComment([FromBody] AddCommentReportRequest report)
         {
-            return await reportService.Add((Report)report);
+            return (ReportResponse)await reportService.Add((Report)report);
+        }
+
+        [HttpPost("post")]
+        public async Task<ActionResult<ReportResponse>> AddReportToPost([FromBody] AddPostReportRequest report)
+        {
+            return (ReportResponse)await reportService.Add((Report)report);
         }
 
         [HttpPatch]
-        public async Task<ActionResult<Report?>> UpdateReport([FromBody] UpdateReportRequest report)
+        public async Task<ActionResult<ReportResponse>> UpdateReport([FromBody] UpdateReportRequest report)
         {
-            return await reportService.Update(report);
+            var updatedReport = await reportService.Update(report);
+            return updatedReport is null ? NotFound() : (ReportResponse)updatedReport;
         }
 
         [HttpDelete]

@@ -63,7 +63,7 @@ namespace SOC.DataContracts.Models
 
         public static explicit operator Person(AddPersonRequest p)
         {
-            return new Person
+            return new()
             {
                 Firstname = p.Firstname,
                 Lastname = p.Lastname,

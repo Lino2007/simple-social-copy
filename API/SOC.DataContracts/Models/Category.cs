@@ -31,7 +31,7 @@ namespace SOC.DataContracts.Models
 
         public static explicit operator Category(AddCategoryRequest c)
         {
-            return new Category
+            return new()
             {
                 Description = c.Description,
                 Title = c.Title,

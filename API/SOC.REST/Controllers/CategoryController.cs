@@ -2,6 +2,7 @@ using SOC.DataContracts.Models;
 using SOC.DataContracts.Request;
 using SOC.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using SOC.DataContracts.Response;
 
 namespace SOC.REST.Controllers
 {
@@ -17,27 +18,30 @@ namespace SOC.REST.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Category?>> GetCategoryById(Guid id)
+        public async Task<ActionResult<CategoryResponse>> GetCategoryById(Guid id)
         {
-            return await categoryService.GetById(id);
+            var category = await categoryService.GetById(id);
+            return category is null ? NotFound() : (CategoryResponse)category;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Category>>> GetCategories()
+        public async Task<ActionResult<IEnumerable<CategoryResponse>>> GetCategories()
         {
-            return new ActionResult<IEnumerable<Category>>(await categoryService.GetAll());
+            var categories = (await categoryService.GetAll()).Select(t => (CategoryResponse)t);
+            return new ActionResult<IEnumerable<CategoryResponse>>(categories);
         }
 
         [HttpPost]
-        public async Task<ActionResult<Category>> AddCategory([FromBody] AddCategoryRequest category)
+        public async Task<ActionResult<CategoryResponse>> AddCategory([FromBody] AddCategoryRequest category)
         {
-            return await categoryService.Add((Category)category);
+            return (CategoryResponse)(await categoryService.Add((Category)category));
         }
 
         [HttpPatch]
-        public async Task<ActionResult<Category?>> UpdateCategory([FromBody] UpdateCategoryRequest category)
+        public async Task<ActionResult<CategoryResponse>> UpdateCategory([FromBody] UpdateCategoryRequest category)
         {
-            return await categoryService.Update(category);
+            var updatedCategory = await categoryService.Update(category);
+            return updatedCategory is null ? NotFound() : (CategoryResponse)updatedCategory;
         }
 
         [HttpDelete]

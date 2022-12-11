@@ -2,6 +2,7 @@ using SOC.DataContracts.Models;
 using SOC.DataContracts.Request;
 using SOC.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using SOC.DataContracts.Response;
 
 namespace SOC.REST.Controllers
 {
@@ -17,27 +18,34 @@ namespace SOC.REST.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<PersonBan?>> GetPersonBanById(Guid id)
+        public async Task<ActionResult<PersonBanResponse>> GetPersonBanById(Guid id)
         {
-            return await personBanService.GetById(id);
+            var personBan = await personBanService.GetById(id);
+            if (personBan is null)
+            {
+                return NotFound();
+            }
+            return (PersonBanResponse)personBan;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<PersonBan>>> GetPersonBans()
+        public async Task<ActionResult<IEnumerable<PersonBanResponse>>> GetPersonBans()
         {
-            return new ActionResult<IEnumerable<PersonBan>>(await personBanService.GetAll());
+            var personBans = (await personBanService.GetAll()).Select(t => (PersonBanResponse)t);
+            return new ActionResult<IEnumerable<PersonBanResponse>>(personBans);
         }
 
         [HttpPost]
-        public async Task<ActionResult<PersonBan>> AddPersonBan([FromBody] AddPersonBanRequest personBan)
+        public async Task<ActionResult<PersonBanResponse>> AddPersonBan([FromBody] AddPersonBanRequest personBan)
         {
-            return await personBanService.Add((PersonBan)personBan);
+            return (PersonBanResponse)await personBanService.Add((PersonBan)personBan);
         }
 
         [HttpPatch]
-        public async Task<ActionResult<PersonBan?>> UpdatePersonBan([FromBody] UpdatePersonBanRequest personBan)
+        public async Task<ActionResult<PersonBanResponse>> UpdatePersonBan([FromBody] UpdatePersonBanRequest personBan)
         {
-            return await personBanService.Update(personBan);
+            var updatedPersonBan = await personBanService.Update(personBan);
+            return updatedPersonBan is null ? NotFound() : (PersonBanResponse)updatedPersonBan;
         }
 
         [HttpDelete]

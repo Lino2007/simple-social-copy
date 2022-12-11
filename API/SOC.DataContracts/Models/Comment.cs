@@ -38,7 +38,7 @@ namespace SOC.DataContracts.Models
 
         public static explicit operator Comment(AddCommentRequest c)
         {
-            return new Comment
+            return new()
             {
                 Content = c.Content,
                 AuthorId = c.AuthorId,

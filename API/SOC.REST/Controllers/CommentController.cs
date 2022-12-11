@@ -2,6 +2,7 @@ using SOC.DataContracts.Models;
 using SOC.DataContracts.Request;
 using SOC.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using SOC.DataContracts.Response;
 
 namespace SOC.REST.Controllers
 {
@@ -17,27 +18,30 @@ namespace SOC.REST.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Comment?>> GetCommentById(Guid id)
+        public async Task<ActionResult<CommentResponse>> GetCommentById(Guid id)
         {
-            return await commentService.GetById(id);
+            var comment = await commentService.GetById(id);
+            return comment is null ? NotFound() : (CommentResponse)comment;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Comment>>> GetComments()
+        public async Task<ActionResult<IEnumerable<CommentResponse>>> GetComments()
         {
-            return new ActionResult<IEnumerable<Comment>>(await commentService.GetAll());
+            var comments = (await commentService.GetAll()).Select(t => (CommentResponse)t);
+            return new ActionResult<IEnumerable<CommentResponse>>(comments);
         }
 
         [HttpPost]
-        public async Task<ActionResult<Comment>> AddComment([FromBody] AddCommentRequest comment)
+        public async Task<ActionResult<CommentResponse>> AddComment([FromBody] AddCommentRequest comment)
         {
-            return await commentService.Add((Comment)comment);
+            return (CommentResponse)await commentService.Add((Comment)comment);
         }
 
         [HttpPatch]
-        public async Task<ActionResult<Comment?>> UpdateComment([FromBody] UpdateCommentRequest comment)
+        public async Task<ActionResult<CommentResponse>> UpdateComment([FromBody] UpdateCommentRequest comment)
         {
-            return await commentService.Update(comment);
+            var updatedComment = await commentService.Update(comment);
+            return updatedComment is null ? NotFound() : (CommentResponse)updatedComment;
         }
 
         [HttpDelete]

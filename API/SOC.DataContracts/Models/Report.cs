@@ -24,14 +24,25 @@ namespace SOC.DataContracts.Models
         [InverseProperty("Reports")]
         public virtual Post? Post { get; set; }
 
-        public static explicit operator Report(AddReportRequest v)
+        public static explicit operator Report(AddCommentReportRequest v)
         {
-            return new Report
+            return new()
+            {
+                Reason = v.Reason,
+                Resolved = false,
+                PostId = null,
+                CommentId = v.CommentId
+            };
+        }
+
+        public static explicit operator Report(AddPostReportRequest v)
+        {
+            return new()
             {
                 Reason = v.Reason,
                 Resolved = false,
                 PostId = v.PostId,
-                CommentId = v.CommentId
+                CommentId = null
             };
         }
     }

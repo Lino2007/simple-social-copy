@@ -23,7 +23,7 @@ namespace SOC.DataContracts.Models
 
         public static explicit operator PersonBan(AddPersonBanRequest v)
         {
-            return new PersonBan
+            return new()
             {
                 Active = v.Active,
                 ActiveUntil = v.ActiveUntil,

@@ -2,6 +2,7 @@ using SOC.DataContracts.Models;
 using SOC.DataContracts.Request;
 using SOC.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using SOC.DataContracts.Response;
 
 namespace SOC.REST.Controllers
 {
@@ -17,27 +18,30 @@ namespace SOC.REST.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Post?>> GetPostById(Guid id)
+        public async Task<ActionResult<PostResponse>> GetPostById(Guid id)
         {
-            return await postService.GetById(id);
+            var post = await postService.GetById(id);
+            return post is null ? NotFound() : (PostResponse)post;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Post>>> GetPosts()
+        public async Task<ActionResult<IEnumerable<PostResponse>>> GetPosts()
         {
-            return new ActionResult<IEnumerable<Post>>(await postService.GetAll());
+            var posts = await postService.GetAll();
+            return new ActionResult<IEnumerable<PostResponse>>(posts.Select(t => (PostResponse)t));
         }
 
         [HttpPost]
-        public async Task<ActionResult<Post>> AddPost([FromBody] AddPostRequest Post)
+        public async Task<ActionResult<PostResponse>> AddPost([FromBody] AddPostRequest Post)
         {
-            return await postService.Add((Post)Post);
+            return (PostResponse)await postService.Add((Post)Post);
         }
 
         [HttpPatch]
-        public async Task<ActionResult<Post?>> UpdatePost([FromBody] UpdatePostRequest Post)
+        public async Task<ActionResult<PostResponse>> UpdatePost([FromBody] UpdatePostRequest post)
         {
-            return await postService.Update(Post);
+            var updatedPost = await postService.Update(post);
+            return updatedPost is null ? NotFound() : (PostResponse)updatedPost;
         }
 
         [HttpDelete]

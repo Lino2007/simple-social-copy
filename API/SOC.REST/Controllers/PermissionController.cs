@@ -1,6 +1,7 @@
 using SOC.DataContracts.Models;
 using SOC.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using SOC.DataContracts.Response;
 
 namespace SOC.REST.Controllers
 {
@@ -16,9 +17,10 @@ namespace SOC.REST.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Permission>>> GetPermissions()
+        public async Task<ActionResult<IEnumerable<PermissionResponse>>> GetPermissions()
         {
-            return new ActionResult<IEnumerable<Permission>>(await permissionService.GetAll());
+            var permissions = (await permissionService.GetAll()).Select(t => (PermissionResponse)t);
+            return new ActionResult<IEnumerable<PermissionResponse>>(permissions);
         }
     }
 }

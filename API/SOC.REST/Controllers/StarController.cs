@@ -2,6 +2,7 @@ using SOC.DataContracts.Models;
 using SOC.DataContracts.Request;
 using SOC.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using SOC.DataContracts.Response;
 
 namespace SOC.REST.Controllers
 {
@@ -17,21 +18,29 @@ namespace SOC.REST.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Star?>> GetStarById(Guid id)
+        public async Task<ActionResult<StarResponse>> GetStarById(Guid id)
         {
-            return await starService.GetById(id);
+            var star = await starService.GetById(id);
+            return star is null ? NotFound() : (StarResponse)star;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Star>>> GetStars()
+        public async Task<ActionResult<IEnumerable<StarResponse>>> GetStars()
         {
-            return new ActionResult<IEnumerable<Star>>(await starService.GetAll());
+            var stars = (await starService.GetAll()).Select(t => (StarResponse)t);
+            return new ActionResult<IEnumerable<StarResponse>>(stars);
         }
 
-        [HttpPost]
-        public async Task<ActionResult<Star>> AddStar([FromBody] AddStarRequest star)
+        [HttpPost("comment")]
+        public async Task<ActionResult<StarResponse>> AddStarToComment([FromBody] AddCommentStarRequest star)
         {
-            return await starService.Add((Star)star);
+            return (StarResponse)await starService.Add((Star)star);
+        }
+
+        [HttpPost("post")]
+        public async Task<ActionResult<StarResponse>> AddStarToPost([FromBody] AddPostStarRequest star)
+        {
+            return (StarResponse)await starService.Add((Star)star);
         }
 
         [HttpDelete]
