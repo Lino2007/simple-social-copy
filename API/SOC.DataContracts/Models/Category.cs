@@ -14,7 +14,7 @@ namespace SOC.DataContracts.Models
             Posts = new HashSet<Post>();
         }
 
-        [StringLength(30)]
+        [StringLength(30, MinimumLength = 5)]
         public string Title { get; set; } = null!;
 
         [StringLength(255)]

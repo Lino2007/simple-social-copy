@@ -19,18 +19,19 @@ namespace SOC.DataContracts.Models
             UserRoles = new HashSet<UserRole>();
         }
 
-        [StringLength(30)]
+        [StringLength(30, MinimumLength = 2)]
         public string Firstname { get; set; } = null!;
 
-        [StringLength(30)]
+        [StringLength(30, MinimumLength = 2)]
         public string Lastname { get; set; } = null!;
 
-        [StringLength(30)]
+        [StringLength(30, MinimumLength = 2)]
         public string Nickname { get; set; } = null!;
 
         [StringLength(255)]
         public string? Bio { get; set; }
 
+        [EmailAddress]
         [StringLength(50)]
         public string Email { get; set; } = null!;
 

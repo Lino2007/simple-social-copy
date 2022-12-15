@@ -13,7 +13,7 @@ namespace SOC.DataContracts.Models
             Stars = new HashSet<Star>();
         }
 
-        [StringLength(255)]
+        [StringLength(255, MinimumLength = 1)]
         public string Content { get; set; } = null!;
 
         public Guid AuthorId { get; set; }
