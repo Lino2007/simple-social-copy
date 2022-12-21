@@ -10,6 +10,8 @@ namespace SOC.DataContracts.Response
 
         public string Reason { get; set; } = null!;
 
+        public Guid PersonId { get; set; }
+
         public static explicit operator PersonBanResponse(PersonBan pb)
         {
             return new()
@@ -18,6 +20,7 @@ namespace SOC.DataContracts.Response
                 Active = pb.Active,
                 ActiveUntil = pb.ActiveUntil,
                 Reason = pb.Reason,
+                PersonId = pb.PersonId,
                 DateCreated = pb.DateCreated,
                 DateModified = pb.DateModified
             };
