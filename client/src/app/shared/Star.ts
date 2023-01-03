@@ -1,6 +1,6 @@
-import { BaseEntity } from "./BaseEntity";
+import { ApiEntity } from "./BaseEntity";
 
-export interface Star extends BaseEntity {
+export interface Star extends ApiEntity {
     personId: string;
     postId?: string;
     commentId?: string;

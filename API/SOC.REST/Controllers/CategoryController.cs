@@ -44,7 +44,7 @@ namespace SOC.REST.Controllers
             return updatedCategory is null ? NotFound() : (CategoryResponse)updatedCategory;
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCategory(Guid id)
         {
             await categoryService.Delete(id);

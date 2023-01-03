@@ -50,7 +50,7 @@ namespace SOC.REST.Controllers
             return updatedReport is null ? NotFound() : (ReportResponse)updatedReport;
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteReport(Guid id)
         {
             await reportService.Delete(id);

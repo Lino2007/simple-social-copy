@@ -44,7 +44,7 @@ namespace SOC.REST.Controllers
             return updatedComment is null ? NotFound() : (CommentResponse)updatedComment;
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteComment(Guid id)
         {
             await commentService.Delete(id);

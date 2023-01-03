@@ -1,6 +1,6 @@
-import { BaseEntity } from "./BaseEntity";
+import { ApiEntity } from "./BaseEntity";
 
-export interface PersonBan extends BaseEntity {
+export interface PersonBan extends ApiEntity {
     active: boolean;
     activeUntil: Date;
     reason: string;

@@ -48,7 +48,7 @@ namespace SOC.REST.Controllers
             return updatedPersonBan is null ? NotFound() : (PersonBanResponse)updatedPersonBan;
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePersonBan(Guid id)
         {
             await personBanService.Delete(id);

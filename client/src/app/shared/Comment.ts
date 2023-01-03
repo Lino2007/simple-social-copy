@@ -1,6 +1,6 @@
-import { BaseEntity } from "./BaseEntity";
+import { ApiEntity } from "./BaseEntity";
 
-export interface Comment extends BaseEntity {
+export interface Comment extends ApiEntity {
     content: string;
     authorId?: string;
     postId?: string;

@@ -1,6 +1,6 @@
-import { BaseEntity } from "./BaseEntity";
+import { ApiEntity } from "./BaseEntity";
 
-export interface RolePermission extends BaseEntity {
+export interface RolePermission extends ApiEntity {
     permissionId: string;
     roleId: string;
 }

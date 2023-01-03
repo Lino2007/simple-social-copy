@@ -43,7 +43,7 @@ namespace SOC.REST.Controllers
             return (StarResponse)await starService.Add((Star)star);
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteStar(Guid id)
         {
             await starService.Delete(id);

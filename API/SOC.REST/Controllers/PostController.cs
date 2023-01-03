@@ -44,7 +44,7 @@ namespace SOC.REST.Controllers
             return updatedPost is null ? NotFound() : (PostResponse)updatedPost;
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePost(Guid id)
         {
             await postService.Delete(id);

@@ -1,6 +1,6 @@
-import { BaseEntity } from "./BaseEntity";
+import { ApiEntity } from "./BaseEntity";
 
-export interface Post extends BaseEntity {
+export interface Post extends ApiEntity {
     title: string;
     content: string;
     locked?: boolean;
