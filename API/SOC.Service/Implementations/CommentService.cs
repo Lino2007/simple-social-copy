@@ -29,7 +29,7 @@ namespace SOC.Service.Implementations
             return await commentRepository.GetAll();
         }
 
-        public async Task<Comment?> GetById(Guid id)
+        public async Task<Comment> GetById(Guid id)
         {
             return await commentRepository.GetById(id);
         }
@@ -39,7 +39,7 @@ namespace SOC.Service.Implementations
             return await commentRepository.Update(entity);
         }
 
-        public async Task<Comment?> Update(UpdateCommentRequest entity)
+        public async Task<Comment> Update(UpdateCommentRequest entity)
         {
             return await commentRepository.Update(entity);
         }

@@ -28,7 +28,7 @@ namespace SOC.Service.Implementations
             return await categoryRepository.GetAll();
         }
 
-        public async Task<Category?> GetById(Guid id)
+        public async Task<Category> GetById(Guid id)
         {
             return await categoryRepository.GetById(id);
         }
@@ -38,7 +38,7 @@ namespace SOC.Service.Implementations
             return await categoryRepository.Update(entity);
         }
 
-        public async Task<Category?> Update(UpdateCategoryRequest entity)
+        public async Task<Category> Update(UpdateCategoryRequest entity)
         {
             return await categoryRepository.Update(entity);
         }

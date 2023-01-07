@@ -21,7 +21,7 @@ namespace SOC.REST.Controllers
         public async Task<ActionResult<PostResponse>> GetPostById(Guid id)
         {
             var post = await postService.GetById(id);
-            return post is null ? NotFound() : (PostResponse)post;
+            return (PostResponse)post;
         }
 
         [HttpGet]
@@ -41,7 +41,7 @@ namespace SOC.REST.Controllers
         public async Task<ActionResult<PostResponse>> UpdatePost([FromBody] UpdatePostRequest post)
         {
             var updatedPost = await postService.Update(post);
-            return updatedPost is null ? NotFound() : (PostResponse)updatedPost;
+            return (PostResponse)updatedPost;
         }
 
         [HttpDelete("{id}")]

@@ -21,7 +21,7 @@ namespace SOC.REST.Controllers
         public async Task<ActionResult<CommentResponse>> GetCommentById(Guid id)
         {
             var comment = await commentService.GetById(id);
-            return comment is null ? NotFound() : (CommentResponse)comment;
+            return (CommentResponse)comment;
         }
 
         [HttpGet]
@@ -41,7 +41,7 @@ namespace SOC.REST.Controllers
         public async Task<ActionResult<CommentResponse>> UpdateComment([FromBody] UpdateCommentRequest comment)
         {
             var updatedComment = await commentService.Update(comment);
-            return updatedComment is null ? NotFound() : (CommentResponse)updatedComment;
+            return (CommentResponse)updatedComment;
         }
 
         [HttpDelete("{id}")]

@@ -21,10 +21,6 @@ namespace SOC.REST.Controllers
         public async Task<ActionResult<PersonBanResponse>> GetPersonBanById(Guid id)
         {
             var personBan = await personBanService.GetById(id);
-            if (personBan is null)
-            {
-                return NotFound();
-            }
             return (PersonBanResponse)personBan;
         }
 
@@ -45,7 +41,7 @@ namespace SOC.REST.Controllers
         public async Task<ActionResult<PersonBanResponse>> UpdatePersonBan([FromBody] UpdatePersonBanRequest personBan)
         {
             var updatedPersonBan = await personBanService.Update(personBan);
-            return updatedPersonBan is null ? NotFound() : (PersonBanResponse)updatedPersonBan;
+            return (PersonBanResponse)updatedPersonBan;
         }
 
         [HttpDelete("{id}")]

@@ -20,8 +20,7 @@ namespace SOC.REST.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<StarResponse>> GetStarById(Guid id)
         {
-            var star = await starService.GetById(id);
-            return star is null ? NotFound() : (StarResponse)star;
+            return (StarResponse)await starService.GetById(id);
         }
 
         [HttpGet]

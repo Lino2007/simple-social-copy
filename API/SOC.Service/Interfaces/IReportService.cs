@@ -5,6 +5,6 @@ namespace SOC.Service.Interfaces
 {
     public interface IReportService : ICrudService<Report>
     {
-        public Task<Report?> Update(UpdateReportRequest entity);
+        public Task<Report> Update(UpdateReportRequest entity);
     }
 }

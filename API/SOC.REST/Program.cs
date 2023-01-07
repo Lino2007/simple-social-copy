@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using SOC.Repository;
 using SOC.Repository.Implementations;
 using SOC.Repository.Interfaces;
+using SOC.REST.Middlewares;
 using SOC.Service.Implementations;
 using SOC.Service.Interfaces;
 
@@ -43,6 +44,7 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+app.UseCustomExceptionHandling();
 app.UseCors(builder => builder
     .AllowAnyHeader()
     .AllowAnyMethod()

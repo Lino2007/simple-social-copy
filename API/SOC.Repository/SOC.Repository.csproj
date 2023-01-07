@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SOC.DataContracts\SOC.DataContracts.csproj" />
+    <ProjectReference Include="..\SOC.Common\SOC.Common.csproj" />
   </ItemGroup>
 
   <ItemGroup>

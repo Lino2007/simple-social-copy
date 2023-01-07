@@ -28,7 +28,7 @@ namespace SOC.Service.Implementations
             return await userRoleRepository.GetAll();
         }
 
-        public async Task<UserRole?> GetById(Guid id)
+        public async Task<UserRole> GetById(Guid id)
         {
             return await userRoleRepository.GetById(id);
         }

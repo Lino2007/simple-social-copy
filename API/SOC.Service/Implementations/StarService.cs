@@ -28,7 +28,7 @@ namespace SOC.Service.Implementations
             return await starRepository.GetAll();
         }
 
-        public async Task<Star?> GetById(Guid id)
+        public async Task<Star> GetById(Guid id)
         {
             return await starRepository.GetById(id);
         }

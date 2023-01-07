@@ -10,6 +10,6 @@ namespace SOC.Repository.Interfaces
     {
         Task<IEnumerable<T>> GetAll();
         Task<IEnumerable<T>> FindBy(Expression<Func<T, bool>> predicate);
-        Task<T?> GetById(Guid id);
+        Task<T> GetById(Guid id);
     }
 }

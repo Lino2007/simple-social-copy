@@ -20,12 +20,9 @@ namespace SOC.Repository.Implementations
 
         public async virtual Task Delete(Guid id)
         {
-            var entity = await db.Set<T>().FirstOrDefaultAsync(t => t.Id.Equals(id));
-            if (entity != null)
-            {
-                db.Set<T>().Remove(entity);
-                await db.SaveChangesAsync();
-            }
+            var entity = await GetById(id);
+            db.Set<T>().Remove(entity);
+            await db.SaveChangesAsync();
         }
 
         public async virtual Task<T> Update(T entity)
@@ -35,13 +32,9 @@ namespace SOC.Repository.Implementations
             return entity;
         }
 
-        public async virtual Task<T?> Update(UpdateDto dtoEntity)
+        public async virtual Task<T> Update(UpdateDto dtoEntity)
         {
-            var itemToUpdate = await db.Set<T>().FirstOrDefaultAsync(p => p.Id.Equals(dtoEntity.Id));
-            if (itemToUpdate == null)
-            {
-                return null;
-            }
+            var itemToUpdate = await GetById(dtoEntity.Id);
             db.Entry(itemToUpdate).CurrentValues.SetValues(dtoEntity);
             return await Update(itemToUpdate);
         }

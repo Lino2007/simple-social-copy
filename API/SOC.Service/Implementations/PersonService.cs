@@ -29,7 +29,7 @@ namespace SOC.Service.Implementations
             return await personRepository.GetAll();
         }
 
-        public async Task<Person?> GetById(Guid id)
+        public async Task<Person> GetById(Guid id)
         {
             return await personRepository.GetById(id);
         }
@@ -39,7 +39,7 @@ namespace SOC.Service.Implementations
             return await personRepository.Update(entity);
         }
 
-        public async Task<Person?> Update(UpdatePersonRequest entity)
+        public async Task<Person> Update(UpdatePersonRequest entity)
         {
             return await personRepository.Update(entity);
         }

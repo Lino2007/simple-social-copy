@@ -2,6 +2,7 @@ using System.Linq.Expressions;
 using SOC.DataContracts.Models;
 using SOC.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using SOC.Common.Exceptions;
 
 namespace SOC.Repository.Implementations
 {
@@ -29,9 +30,14 @@ namespace SOC.Repository.Implementations
             return await db.Set<T>().AsNoTracking().ToListAsync();
         }
 
-        public async virtual Task<T?> GetById(Guid id)
+        public async virtual Task<T> GetById(Guid id)
         {
-            return (await this.FindBy(p => p.Id.Equals(id))).FirstOrDefault();
+            var result = (await this.FindBy(p => p.Id.Equals(id))).FirstOrDefault();
+            if (result is null)
+            {
+                throw new ObjectNotFoundException(typeof(T), id);
+            }
+            return result;
         }
     }
 }

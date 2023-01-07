@@ -21,7 +21,7 @@ namespace SOC.REST.Controllers
         public async Task<ActionResult<CategoryResponse>> GetCategoryById(Guid id)
         {
             var category = await categoryService.GetById(id);
-            return category is null ? NotFound() : (CategoryResponse)category;
+            return (CategoryResponse)category;
         }
 
         [HttpGet]
@@ -41,7 +41,7 @@ namespace SOC.REST.Controllers
         public async Task<ActionResult<CategoryResponse>> UpdateCategory([FromBody] UpdateCategoryRequest category)
         {
             var updatedCategory = await categoryService.Update(category);
-            return updatedCategory is null ? NotFound() : (CategoryResponse)updatedCategory;
+            return (CategoryResponse)updatedCategory;
         }
 
         [HttpDelete("{id}")]

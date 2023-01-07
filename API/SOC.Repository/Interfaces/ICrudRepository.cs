@@ -8,6 +8,6 @@ namespace SOC.Repository.Interfaces
         Task<T> Add(T entity);
         Task Delete(Guid id);
         Task<T> Update(T entity);
-        Task<T?> Update(UpdateDto dtoEntity);
+        Task<T> Update(UpdateDto dtoEntity);
     }
 }

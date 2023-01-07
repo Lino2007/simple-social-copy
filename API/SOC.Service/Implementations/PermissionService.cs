@@ -18,7 +18,7 @@ namespace SOC.Service.Implementations
             return await permissionRepository.GetAll();
         }
 
-        public async Task<Permission?> GetById(Guid id)
+        public async Task<Permission> GetById(Guid id)
         {
             return await permissionRepository.GetById(id);
         }

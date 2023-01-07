@@ -5,6 +5,6 @@ namespace SOC.Service.Interfaces
 {
     public interface IPostService : ICrudService<Post>
     {
-        public Task<Post?> Update(UpdatePostRequest entity);
+        public Task<Post> Update(UpdatePostRequest entity);
     }
 }

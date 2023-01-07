@@ -21,7 +21,7 @@ namespace SOC.REST.Controllers
         public async Task<ActionResult<ReportResponse>> GetReportById(Guid id)
         {
             var report = await reportService.GetById(id);
-            return report is null ? NotFound() : (ReportResponse)report;
+            return (ReportResponse)report;
         }
 
         [HttpGet]
@@ -47,7 +47,7 @@ namespace SOC.REST.Controllers
         public async Task<ActionResult<ReportResponse>> UpdateReport([FromBody] UpdateReportRequest report)
         {
             var updatedReport = await reportService.Update(report);
-            return updatedReport is null ? NotFound() : (ReportResponse)updatedReport;
+            return (ReportResponse)updatedReport;
         }
 
         [HttpDelete("{id}")]
