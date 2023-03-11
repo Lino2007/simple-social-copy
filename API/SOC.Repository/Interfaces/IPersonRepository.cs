@@ -6,5 +6,6 @@ namespace SOC.Repository.Interfaces
 {
     public interface IPersonRepository : ICrudRepository<Person>
     {
+        Task<Person> RegisterPerson(Person entity);
     }
 }

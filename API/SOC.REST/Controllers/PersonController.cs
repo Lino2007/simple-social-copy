@@ -37,6 +37,13 @@ namespace SOC.REST.Controllers
             return (PersonResponse)await personService.Add((Person)person);
         }
 
+        [HttpPost("register")]
+        public async Task<ActionResult<PersonResponse>> RegisterPerson([FromBody] AddPersonRequest person)
+        {
+            var p = await personService.RegisterPerson((Person)person);
+            return (PersonResponse)p;
+        }
+
         [HttpPatch]
         public async Task<ActionResult<PersonResponse>> UpdatePerson([FromBody] UpdatePersonRequest person)
         {

@@ -1,0 +1,53 @@
+.container {
+    margin-top: 5%;
+}
+
+input,
+select {
+    padding: 2pt 2pt;
+}
+
+button {
+    margin-top: 5%;
+}
+
+input.ng-invalid.ng-touched,
+select.ng-invalid.ng-touched {
+    /* only if form was previously touched and no valid input was typed */
+    border: 1px solid red;
+}
+
+.help-block {
+    font-size: small;
+    font-weight: bold;
+}
+
+.error-block {
+    color: red;
+}
+
+.row {
+    padding: 0.5pt 0.5pt;
+}
+
+@keyframes spinner {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.spinner:before {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin-top: -10px;
+    margin-left: -10px;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+    border-top-color: #000000;
+    animation: spinner .8s linear infinite;
+}

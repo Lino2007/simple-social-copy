@@ -12,4 +12,8 @@ export class PersonService extends ResourceService<Person> {
   constructor(http: HttpClient, appConfigService: AppConfigService) {
     super(http, appConfigService, 'Person');
   }
+
+  registerPerson(p: Person) {
+    return this.create(p, '/register');
+  }
 }

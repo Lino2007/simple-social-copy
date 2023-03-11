@@ -20,8 +20,11 @@ export abstract class ResourceService<T extends ApiEntity> {
     return this.http.get<T>(`${this.fullUrl}/${id}`);
   }
 
-  create(item: Omit<T, 'id'>): Observable<T> {
-    return this.http.post<T>(this.fullUrl, item);
+  create(item: Omit<T, 'id'>, endpointPath: string = this.fullUrl): Observable<T> {
+    if (endpointPath !== this.fullUrl) {
+      endpointPath = this.fullUrl + endpointPath;
+    }
+    return this.http.post<T>(endpointPath, item);
   }
 
   update(item: T) {

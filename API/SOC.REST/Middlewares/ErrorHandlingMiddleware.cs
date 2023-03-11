@@ -47,6 +47,11 @@ namespace SOC.REST.Middlewares
                 case DbUpdateException:
                     problemDetails.Detail = "Failed to save object to database.";
                     break;
+                case RegistrationException:
+                    problemDetails.Status = context.Response.StatusCode = 200;
+                    problemDetails.Title = "Failed to register user.";
+                    problemDetails.Detail = exception.Message;
+                    break;
             }
 
             await context.Response.WriteAsJsonAsync(problemDetails);

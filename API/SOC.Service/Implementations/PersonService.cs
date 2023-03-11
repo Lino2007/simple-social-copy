@@ -34,6 +34,11 @@ namespace SOC.Service.Implementations
             return await personRepository.GetById(id);
         }
 
+        public async Task<Person> RegisterPerson(Person entity)
+        {
+            return await personRepository.RegisterPerson(entity);
+        }
+
         public async Task<Person> Update(Person entity)
         {
             return await personRepository.Update(entity);
